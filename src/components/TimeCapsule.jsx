@@ -135,57 +135,57 @@ function TimeCapsule() {
           </p>
 
           <div className="space-y-2">
-            <p className="font-medium">Replit:</p>
+            <p className="font-medium">Trinket.io:</p>
             <ul className="list-disc pl-5 space-y-1">
               <li>
                 Python Capsule Maker:{" "}
-                <span className="italic text-gray-600">
-                  https://replit.com/@SanjinDedic/capsulecreator
-                </span>
+                <a
+                  href="https://trinket.io/library/trinkets/cb0c43fc99"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 hover:text-blue-800 italic"
+                >
+                  Capsule Creator
+                </a>
               </li>
               <li>
                 Python Cloud Based Decryptor (with documentation):{" "}
-                <span className="italic text-gray-600">
-                  https://replit.com/@SanjinDedic/capsuledecoder
-                </span>
+                <a
+                  href="https://trinket.io/library/trinkets/b2e45be806"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 hover:text-blue-800 italic"
+                >
+                  Capsule Decoder
+                </a>
               </li>
             </ul>
           </div>
 
           <div className="space-y-2">
             <p className="font-medium">GitHub:</p>
+            OPTIONAL: to run the code locally, you can clone these repositories:
             <ul className="list-disc pl-5 space-y-1">
               <li>
-                Python Capsule Maker:{" "}
+                Time Capsule Server Code:{" "}
                 <a
-                  href="https://github.com/SanjinDedic/vcc/blob/main/2024_STAGE_1/capsule_creator.py"
+                  href="https://github.com/SanjinDedic/time_capsule"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-600 hover:text-blue-800 italic"
                 >
-                  capsule_creator.py
+                  GitHub Repository
                 </a>
               </li>
               <li>
-                Python Cloud Based Decryptor:{" "}
+                Frontend Code (not relevant to the problem):{" "}
                 <a
-                  href="https://github.com/SanjinDedic/vcc/blob/main/2024_STAGE_1/capsule_decoder.py"
+                  href="https://github.com/SanjinDedic/time_capsule_frontend"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-600 hover:text-blue-800 italic"
                 >
-                  capsule_decoder.py
-                </a>
-              </li>
-              <li>
-                Decryptor Documentation:{" "}
-                <a
-                  href="https://github.com/SanjinDedic/vcc/blob/main/2024_STAGE_1/DECODER_README.md"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 hover:text-blue-800 italic"
-                >
-                  DECODER README
+                  GitHub Repository
                 </a>
               </li>
             </ul>
@@ -193,13 +193,12 @@ function TimeCapsule() {
 
           <p>
             Your task is to analyse the code above, find weaknesses and crack
-            the time capsule before 11/07/2024 when its contents automatically
-            reveal.
+            the time capsule before 9/01/2028 (when the time capsule is set to
+            be revealed).
           </p>
           <p>
-            A good place to start is by running the decryptor on Replit or on
-            your own Python IDE. Also, it is possible to solve this both with
-            and without writing code (key is reading code) Good luck!
+            A good place to start is by running the capsule_maker code on
+            trinket.io or your own computer and seeing how the encryption works.
           </p>
 
           <div className="space-y-2">
