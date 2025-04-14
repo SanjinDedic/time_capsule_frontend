@@ -17,11 +17,56 @@ function TimeCapsule() {
     userKey: "",
   });
 
-  // Function to convert Unix timestamp to readable date in Australian Eastern Time
+  // Function to convert timestamp to readable date in Australian Eastern Time
+  // Handles both Unix timestamps and formatted date strings
   const formatDate = (timestamp) => {
     if (!timestamp) return "";
-    const date = new Date(timestamp * 1000);
-    return date.toLocaleString("en-AU", {
+
+    let date;
+    let epochSeconds = "";
+
+    // Check if the timestamp is a string in the format "DD/MM/YYYY HH:MM:SS AM/PM UTC"
+    if (typeof timestamp === "string" && timestamp.includes("/")) {
+      // Parse the formatted date string
+      // Expected format: "14/04/2025 02:50:24 AM UTC"
+      const [datePart, timePart] = timestamp.split(" ");
+      const [day, month, year] = datePart.split("/");
+
+      // Extract time components
+      let [time, ampm, timezone] = timePart.split(" ");
+      if (!timezone && ampm && ampm.includes("UTC")) {
+        timezone = ampm;
+        ampm = "";
+      }
+
+      const [hours, minutes, seconds] = time.split(":");
+
+      // Convert hours to 24-hour format if PM
+      let hour24 = parseInt(hours);
+      if (ampm === "PM" && hour24 < 12) hour24 += 12;
+      if (ampm === "AM" && hour24 === 12) hour24 = 0;
+
+      // Create a Date object in UTC
+      date = new Date(
+        Date.UTC(
+          parseInt(year),
+          parseInt(month) - 1, // JavaScript months are 0-indexed
+          parseInt(day),
+          hour24,
+          parseInt(minutes),
+          parseInt(seconds)
+        )
+      );
+
+      // Calculate epoch seconds
+      epochSeconds = Math.floor(date.getTime() / 1000);
+    } else {
+      // Handle it as a Unix timestamp (seconds since epoch)
+      epochSeconds = timestamp;
+      date = new Date(timestamp * 1000);
+    }
+
+    const formattedDate = date.toLocaleString("en-AU", {
       timeZone: "Australia/Sydney",
       day: "numeric",
       month: "short",
@@ -30,6 +75,8 @@ function TimeCapsule() {
       minute: "numeric",
       hour12: true,
     });
+
+    return { epochSeconds, formattedDate };
   };
 
   // Function to copy text to clipboard
@@ -334,8 +381,10 @@ function TimeCapsule() {
                 Time Created:
               </span>
               <div>
+                {response.timeCreated &&
+                  formatDate(response.timeCreated).epochSeconds}{" "}
                 <span className="text-green-600 font-medium">
-                  ({formatDate(response.timeCreated)})
+                  ({formatDate(response.timeCreated).formattedDate})
                 </span>
               </div>
             </div>
@@ -345,8 +394,10 @@ function TimeCapsule() {
                 Time Revealed:
               </span>
               <div>
+                {response.timeRevealed &&
+                  formatDate(response.timeRevealed).epochSeconds}{" "}
                 <span className="text-green-600 font-medium">
-                  ({formatDate(response.timeRevealed)})
+                  ({formatDate(response.timeRevealed).formattedDate})
                 </span>
               </div>
             </div>
