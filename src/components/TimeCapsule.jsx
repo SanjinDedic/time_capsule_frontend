@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 
 // Get API URL from environment variables - Vite exposes these with the VITE_ prefix
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
 function TimeCapsule() {
   const [userInput, setUserInput] = useState('');
@@ -25,12 +25,12 @@ function TimeCapsule() {
     }
 
     try {
-      const res = await fetch(`http://localhost:8000/submit-capsule`, {
-        method: 'POST',
+      const res = await fetch(`${API_URL}/submit-capsule`, {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ data: userInput })
+        body: JSON.stringify({ data: userInput }),
       });
 
       if (!res.ok) {
