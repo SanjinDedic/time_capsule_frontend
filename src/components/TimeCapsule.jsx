@@ -20,7 +20,14 @@ function TimeCapsule() {
   // Function to convert Unix timestamp to readable date
   const formatDate = (timestamp) => {
     if (!timestamp) return "";
-    const date = new Date(timestamp * 1000);
+
+    // Handle both string and number timestamps
+    const timestampNum =
+      typeof timestamp === "string" ? parseInt(timestamp, 10) : timestamp;
+
+    if (isNaN(timestampNum)) return "";
+
+    const date = new Date(timestampNum * 1000);
     return date.toLocaleString();
   };
 
