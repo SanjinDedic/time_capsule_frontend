@@ -17,18 +17,29 @@ function TimeCapsule() {
     userKey: "",
   });
 
-  // Function to convert Unix timestamp to readable date
+  // Function to convert timestamp to readable date
   const formatDate = (timestamp) => {
     if (!timestamp) return "";
 
-    // Handle both string and number timestamps
-    const timestampNum =
-      typeof timestamp === "string" ? parseInt(timestamp, 10) : timestamp;
+    // If it's already a formatted date string (contains slashes), return as is
+    if (typeof timestamp === "string" && timestamp.includes("/")) {
+      return timestamp;
+    }
 
-    if (isNaN(timestampNum)) return "";
+    // Handle numeric timestamps
+    try {
+      // Parse to number if it's a string containing a number
+      const timestampNum =
+        typeof timestamp === "string" ? parseInt(timestamp, 10) : timestamp;
 
-    const date = new Date(timestampNum * 1000);
-    return date.toLocaleString();
+      if (isNaN(timestampNum)) return "";
+
+      const date = new Date(timestampNum * 1000);
+      return date.toLocaleString();
+    } catch (error) {
+      console.error("Error formatting date:", error);
+      return "";
+    }
   };
 
   // Function to copy text to clipboard
@@ -71,6 +82,7 @@ function TimeCapsule() {
       }
 
       const data = await res.json();
+      console.log("Server response:", data); // For debugging
 
       setResponse({
         message: data.message || "",
@@ -333,11 +345,6 @@ function TimeCapsule() {
               </span>
               <div>
                 <span className="text-gray-800">{response.timeCreated}</span>
-                {response.timeCreated && (
-                  <span className="ml-2 text-green-600">
-                    ({formatDate(response.timeCreated)})
-                  </span>
-                )}
               </div>
             </div>
 
@@ -347,11 +354,6 @@ function TimeCapsule() {
               </span>
               <div>
                 <span className="text-gray-800">{response.timeRevealed}</span>
-                {response.timeRevealed && (
-                  <span className="ml-2 text-green-600">
-                    ({formatDate(response.timeRevealed)})
-                  </span>
-                )}
               </div>
             </div>
 
