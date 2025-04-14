@@ -134,8 +134,13 @@ function TimeCapsule() {
             unhackable invention and have even published the source code:
           </p>
 
-          <div className="space-y-2">
-            <p className="font-medium">Trinket.io:</p>
+          <div className="space-y-2 border-l-2 border-green-500 pl-4">
+            <p className="font-medium">
+              Trinket.io:
+              <span className="ml-2 inline-block bg-green-100 text-green-800 text-xs px-2 py-0.5 rounded-full font-medium">
+                Recommended
+              </span>
+            </p>
             <ul className="list-disc pl-5 space-y-1">
               <li>
                 Python Capsule Maker:{" "}
@@ -162,9 +167,13 @@ function TimeCapsule() {
             </ul>
           </div>
 
-          <div className="space-y-2">
-            <p className="font-medium">GitHub:</p>
-            OPTIONAL: to run the code locally, you can clone these repositories:
+          <div className="space-y-2 border-l-2 border-gray-300 pl-4">
+            <p className="font-medium">
+              GitHub:
+              <span className="ml-2 inline-block bg-gray-100 text-gray-700 text-xs px-2 py-0.5 rounded-full font-medium">
+                Optional for advanced users
+              </span>
+            </p>
             <ul className="list-disc pl-5 space-y-1">
               <li>
                 Time Capsule Server Code:{" "}
