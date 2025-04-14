@@ -17,29 +17,19 @@ function TimeCapsule() {
     userKey: "",
   });
 
-  // Function to convert timestamp to readable date
+  // Function to convert Unix timestamp to readable date in Australian Eastern Time
   const formatDate = (timestamp) => {
     if (!timestamp) return "";
-
-    // If it's already a formatted date string (contains slashes), return as is
-    if (typeof timestamp === "string" && timestamp.includes("/")) {
-      return timestamp;
-    }
-
-    // Handle numeric timestamps
-    try {
-      // Parse to number if it's a string containing a number
-      const timestampNum =
-        typeof timestamp === "string" ? parseInt(timestamp, 10) : timestamp;
-
-      if (isNaN(timestampNum)) return "";
-
-      const date = new Date(timestampNum * 1000);
-      return date.toLocaleString();
-    } catch (error) {
-      console.error("Error formatting date:", error);
-      return "";
-    }
+    const date = new Date(timestamp * 1000);
+    return date.toLocaleString("en-AU", {
+      timeZone: "Australia/Sydney",
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    });
   };
 
   // Function to copy text to clipboard
@@ -344,7 +334,9 @@ function TimeCapsule() {
                 Time Created:
               </span>
               <div>
-                <span className="text-gray-800">{response.timeCreated}</span>
+                <span className="text-green-600 font-medium">
+                  ({formatDate(response.timeCreated)})
+                </span>
               </div>
             </div>
 
@@ -353,7 +345,9 @@ function TimeCapsule() {
                 Time Revealed:
               </span>
               <div>
-                <span className="text-gray-800">{response.timeRevealed}</span>
+                <span className="text-green-600 font-medium">
+                  ({formatDate(response.timeRevealed)})
+                </span>
               </div>
             </div>
 
